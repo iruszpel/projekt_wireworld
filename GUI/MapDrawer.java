@@ -15,8 +15,8 @@ public class MapDrawer {
     private int boxSize;
     private int lineWidth;
 
-    private int c = 6;
-    private int r = 5;
+    private int c = 40;
+    private int r = 32;
 
 
 
@@ -30,7 +30,7 @@ public class MapDrawer {
 
         System.out.println(lineWidth);
 
-        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  ((height/r) - lineWidth) : ((width / c) - lineWidth);
+        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  (height-3*lineWidth)/r : (width-3*lineWidth)/ c;
 
 
         computedHeight = boxSize*r;
@@ -62,7 +62,7 @@ public class MapDrawer {
     }
     public void drawAtXY(int x, int y, Color color) {
         gc.setFill(color);
-        gc.fillRect(boxSize*x+offsetX+lineWidth/2,boxSize*y+offsetY+lineWidth/2,boxSize-lineWidth,boxSize-lineWidth);
+        gc.fillRect(boxSize*x+offsetX+Math.ceil(lineWidth/2),boxSize*y+offsetY+Math.ceil(lineWidth/2),boxSize-lineWidth,boxSize-lineWidth);
 
     }
 }

@@ -1,0 +1,7 @@
+.combo-box {
+-fx-text-fill: #fff;
+-fx-background-color: #2d2d2d;
+-fx-border-color:   #fff;
+
+-fx-border-width: 0 0 1 0;
+}

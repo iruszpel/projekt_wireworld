@@ -25,6 +25,17 @@ public class Main extends Application {
         canvasDrawer.drawEdges();
         canvasDrawer.drawAtXY(0,1, Color.RED);
 
+        SettingsController settingsController = new SettingsController(scene);
+        settingsController.enableListeners();
+        IOButtonsController ioController = new IOButtonsController(scene, primaryStage);
+        ioController.enableListeners();
+
+        SimulationStateController simStateController = new SimulationStateController(scene);
+        simStateController.enableListeners();
+
+
+
+
     }
 
     public static void main(String[] args) {
