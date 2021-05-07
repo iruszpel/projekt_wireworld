@@ -204,7 +204,7 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="603.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="nextButton" fitHeight="30.0" fitWidth="30.0" layoutX="603.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/outline_navigate_next_black_24dp.png" />
                </image>
@@ -215,7 +215,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="543.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="previousButton" fitHeight="30.0" fitWidth="30.0" layoutX="543.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/outline_navigate_before_black_24dp.png" />
                </image>

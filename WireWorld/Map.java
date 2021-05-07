@@ -62,9 +62,23 @@ public class Map {
         map[y][x] = cell;
     }
 
-    public int countNeighbours(){
+    //liczenie sąsiednich głów elektronów
+    public int countNeighbours(Cell c){
         int count = 0;
-        // napisać logikę liczącą sąsiadów
+        int x = c.getX();
+        int y = c.getY();
+        for(int i = x-1; i < x+2; i++) {
+            for( int j = y-1; j < y+2; j++){
+                if (i >= 0 && i < Map.width && j < Map.height && j >= 0){
+                    if(i != 0 && j != 0){
+                        if(getCell(j, i).getState() == 3){
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+
         return count;
     }
     public static void main(String[] args) throws FileNotFoundException {

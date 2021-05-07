@@ -42,8 +42,9 @@ public class IOButtonsController implements GUIController {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(stage);
             try {
-                //Lepiej wyczyścić listę map tutaj
                 ReadFromFile.read(selectedFile.getAbsolutePath());
+                Map.maps.clear();
+                Map.iteration = -1;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -51,9 +52,33 @@ public class IOButtonsController implements GUIController {
 
 
             drawer.drawEdges();
-            drawer.drawMap(Map.maps.size()-1);//I tu zmienić na 0 jak się już zrobi czyszczenie
+            drawer.drawMap(0);
             openFileText.setText("Wczytany plik: " + selectedFile.getName());
 
+            event.consume();
+        });
+        ImageView nextButton = (ImageView) scene.lookup("#nextButton");
+        nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            if(Main.currentIteration < Map.iteration){
+                drawer.clearMap();
+                drawer.drawEdges();
+                Main.currentIteration++;
+                drawer.drawMap(Main.currentIteration);
+            }
+
+            event.consume();
+        });
+
+        ImageView previousButton = (ImageView) scene.lookup("#previousButton");
+        previousButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            if(Main.currentIteration > 0) {
+                drawer.clearMap();
+                drawer.drawEdges();
+                Main.currentIteration--;
+                drawer.drawMap(Main.currentIteration);
+            }
             event.consume();
         });
     }

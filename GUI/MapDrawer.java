@@ -33,7 +33,7 @@ public class MapDrawer {
 
         lineWidth = Math.min(2+(10/r)*2,2+(10/c)*2); //To durne ale zapewnia parzystą grubość linii, która jest potrzebna żeby kwadraty były faktycznie kwadratami
 
-        System.out.println(lineWidth);
+        //System.out.println(lineWidth);
 
         boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  (height-3*lineWidth)/r : (width-3*lineWidth)/ c;
 
@@ -83,15 +83,15 @@ public class MapDrawer {
                         break;
                     }
                     case 1: {
-                        drawAtXY(x,y, Color.YELLOW);
+                        drawAtXY(x,y, Color.rgb(255, 215, 0));
                         break;
                     }
                     case 2: {
-                        drawAtXY(x,y, Color.BLUE);
+                        drawAtXY(x,y, Color.RED);
                         break;
                     }
                     case 3: {
-                        drawAtXY(x,y, Color.RED);
+                        drawAtXY(x,y, Color.BLUE);
                         break;
                     }
 

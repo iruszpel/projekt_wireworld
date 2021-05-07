@@ -1,8 +1,13 @@
-Conductor: 18, 1
+
 ElectronTail: 18, 2
 ElectronHead: 18, 3
 Wire: 18, 4
 Diode: 2, 3, Normal
+ElectronTail: 2, 1
+ElectronHead: 2, 2
 Diode: 6, 3, Reversed
+ElectronTail: 6, 1
+ElectronHead: 6, 2
 Generator: 10, 3
+Diode: 10, 10, Reversed
 Wire: 14, 3

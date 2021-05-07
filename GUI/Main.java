@@ -1,6 +1,7 @@
 package GUI;
 
 import Cell.Cell;
+import WireWorld.Iteration;
 import WireWorld.ReadFromFile;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -11,10 +12,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import WireWorld.Map;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main extends Application {
 
     public static int h = Map.height;
     public static int w = Map.width;
+    public static int currentIteration = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -32,7 +36,13 @@ public class Main extends Application {
         ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
 
         canvasDrawer.drawEdges();
-        canvasDrawer.drawMap(Map.maps.size()-1);
+        canvasDrawer.drawMap(currentIteration);
+
+
+        int howManyIterations = 20;
+        for(int i=0; i< howManyIterations; i++){
+            Iteration.iterate();
+        }
 
         SettingsController settingsController = new SettingsController(scene);
         settingsController.enableListeners();

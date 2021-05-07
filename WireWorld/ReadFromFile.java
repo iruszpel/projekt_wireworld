@@ -32,33 +32,33 @@ public class ReadFromFile {
 
             switch (elem) {
                 case "ElectronHead": {
-                    System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                     mapa.setCell(y, x, 3);
                     break;
                 }
                 case "ElectronTail": {
-                    System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                     mapa.setCell(y, x, 2);
                     break;
                 }
                 case "Conductor": {
-                    System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                     mapa.setCell(y, x, 1);
                     break;
                 }
                 case "Diode": {
                     String facing = scan.next().replaceAll(",", "").replaceAll(":", "");
-                    System.out.printf("Elem=%s, y=%s, x=%s, facing=%s\n", elem, y, x, facing);
+                    //System.out.printf("Elem=%s, y=%s, x=%s, facing=%s\n", elem, y, x, facing);
                     Diode.generate(mapa.getCell(y, x), facing);
                     break;
                 }
                 case "Generator": {
-                    System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                     Generator.generate(mapa.getCell(y, x));
                     break;
                 }
                 case "Wire": {
-                    System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                     Wire.generate(mapa.getCell(y, x));
                     break;
                 }
