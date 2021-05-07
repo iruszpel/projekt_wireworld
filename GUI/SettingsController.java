@@ -1,6 +1,8 @@
 package GUI;
 
+import WireWorld.Map;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,15 +19,15 @@ public class SettingsController implements GUIController {
          /*
          *Ustawienia wewnątrz okna ustawień
          */
-        AnchorPane settingsPanel = (AnchorPane) scene.lookup("#settingsbox");
+        AnchorPane settingsPanel = (AnchorPane) scene.lookup("#settingsBox");
 
-        ImageView settingsButton = (ImageView) scene.lookup("#settingsbutton");
+        ImageView settingsButton = (ImageView) scene.lookup("#settingsButton");
         settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             settingsPanel.setVisible(true);
             event.consume();
         });
 
-        ImageView settingsCloseButton = (ImageView) scene.lookup("#settingsclose");
+        ImageView settingsCloseButton = (ImageView) scene.lookup("#settingsClose");
         settingsCloseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             settingsPanel.setVisible(false);
             event.consume();
@@ -37,19 +39,31 @@ public class SettingsController implements GUIController {
         /*
         *Ustawienia poza oknem ustawień
         */
-        TextField iterationsField = (TextField) scene.lookup("#iterfield");
-        TextField animationSpeedField = (TextField) scene.lookup("#animspeedfield");
+        TextField iterationsField = (TextField) scene.lookup("#iterField");
+        TextField animationSpeedField = (TextField) scene.lookup("#animSpeedField");
         //Słuchacze pól tekstowych
         iterationsField.focusedProperty().addListener((obs, oldVal, newVal) -> {
                     if (!newVal) { //Unfocused
-                        System.out.println(iterationsField.getText());
-                        System.out.println("W tym momencie trzeba będzie zapisać informację o tym jaką ilość iteracji wybrano");
+                        int newIterations = iterationsField.getText().equals("") ? 0 : Integer.parseInt(iterationsField.getText());
+                        if (Map.maps.size() - 1 < newIterations){
+                            Main.generateIterations(newIterations - Main.howManyIterations);
+                        }
+                        Main.howManyIterations = newIterations;
+                        Main.currentIteration = 0;
+                        //Update slider
+                        Slider iterSlider = (Slider) scene.lookup("#iterSlider");
+                        iterSlider.setMax(Main.howManyIterations);
+                        iterSlider.setValue(0);
+                        iterSlider.setMajorTickUnit(Main.howManyIterations/5);
+                        //Reset current drawing
+                        Main.canvasDrawer.clearMap();
+                        Main.canvasDrawer.drawEdges();
+                        Main.canvasDrawer.drawMap(0);
                     }
         });
         animationSpeedField.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) { //Unfocused
-                System.out.println(animationSpeedField.getText());
-                System.out.println("W tym momencie trzeba będzie zapisać informację o tym jaką szybkość animacji wybrano");
+                Main.animationSpeed = animationSpeedField.getText().equals("") ? 1 : Integer.parseInt(animationSpeedField.getText());
             }
         });
 
@@ -65,6 +79,11 @@ public class SettingsController implements GUIController {
                 animationSpeedField.setText(newVal.replaceAll("[^\\d]", ""));
             }
         });
+
+        //Wpisanie w nie domyślnych ustawień
+
+        iterationsField.setText(Integer.toString(Main.howManyIterations));
+        animationSpeedField.setText(Integer.toString(Main.animationSpeed));
 
 
     }
