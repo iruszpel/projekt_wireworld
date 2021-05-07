@@ -5,6 +5,7 @@ import WireWorld.ReadFromFile;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -36,6 +37,7 @@ public class IOButtonsController implements GUIController {
         });
 
         ImageView openFileButton = (ImageView) scene.lookup("#openbutton");
+        Text openFileText = (Text) scene.lookup("#openfiletext");
         openFileButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(stage);
@@ -50,6 +52,7 @@ public class IOButtonsController implements GUIController {
 
             drawer.drawEdges();
             drawer.drawMap(Map.maps.size()-1);//I tu zmienić na 0 jak się już zrobi czyszczenie
+            openFileText.setText("Wczytany plik: " + selectedFile.getName());
 
             event.consume();
         });

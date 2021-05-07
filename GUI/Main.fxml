@@ -199,7 +199,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Text fill="WHITE" layoutX="880.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wczytany plik: jdkjsidis.map">
+            <Text id="openfiletext" fill="WHITE" layoutX="855.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wczytany plik: default" textAlignment="RIGHT" wrappingWidth="140.0">
                <font>
                   <Font size="10.0" />
                </font>
