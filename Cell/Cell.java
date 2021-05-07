@@ -11,7 +11,7 @@ public class Cell {
         this.state = 0;
     }
 
-    int getState(){
+    public int getState(){
         return state;
     }
 
@@ -26,4 +26,5 @@ public class Cell {
     public int getY(){
         return y;
     }
+
 }

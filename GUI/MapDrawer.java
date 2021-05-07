@@ -1,5 +1,7 @@
 package GUI;
 
+import Cell.Cell;
+import WireWorld.Map;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -15,8 +17,8 @@ public class MapDrawer {
     private int boxSize;
     private int lineWidth;
 
-    private int c = 6;
-    private int r = 5;
+    private int c = Main.w;
+    private int r = Main.h;
 
 
 
@@ -64,5 +66,33 @@ public class MapDrawer {
         gc.setFill(color);
         gc.fillRect(boxSize*x+offsetX+lineWidth/2,boxSize*y+offsetY+lineWidth/2,boxSize-lineWidth,boxSize-lineWidth);
 
+    }
+
+    public void drawMap(int iteration){
+        for(int y = 0; y < Map.height; y++){
+            for(int x = 0; x < Map.width; x++){
+                int c = Map.maps.get(iteration).getCell(y, x).getState();
+                switch(c){
+                    case 0: {
+                        drawAtXY(x,y, Color.rgb(0,0,0, 0.1)); //transparentny kolor
+                        break;
+                    }
+                    case 1: {
+                        drawAtXY(x,y, Color.YELLOW);
+                        break;
+                    }
+                    case 2: {
+                        drawAtXY(x,y, Color.BLUE);
+                        break;
+                    }
+                    case 3: {
+                        drawAtXY(x,y, Color.RED);
+                        break;
+                    }
+
+
+                }
+            }
+        }
     }
 }
