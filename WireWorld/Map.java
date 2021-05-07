@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Map {
     public Cell map[][];
-    public static int height = 20;
-    public static int width = 24;
+    public static int height = 30;
+    public static int width = 36;
 
     public static int iteration = -1;
 

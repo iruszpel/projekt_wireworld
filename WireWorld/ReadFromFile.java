@@ -1,6 +1,7 @@
 package WireWorld;
 
 import ElementsGenerator.Diode;
+import ElementsGenerator.Gates;
 import ElementsGenerator.Generator;
 import ElementsGenerator.Wire;
 
@@ -53,13 +54,22 @@ public class ReadFromFile {
                     break;
                 }
                 case "Generator": {
+                    String tick = scan.next().replaceAll(",", "").replaceAll(":", "");
+
                     //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
-                    Generator.generate(mapa.getCell(y, x));
+                    Generator.generate(mapa.getCell(y, x), tick);
                     break;
                 }
                 case "Wire": {
+                    String orientation = scan.next().replaceAll(",", "").replaceAll(":", "");
                     //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
-                    Wire.generate(mapa.getCell(y, x));
+                    Wire.generate(mapa.getCell(y, x), orientation);
+                    break;
+                }
+                case "Gate": {
+                    String gate = scan.next().replaceAll(",", "").replaceAll(":", "");
+                    //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
+                    Gates.generate(mapa.getCell(y, x), gate);
                     break;
                 }
             }
