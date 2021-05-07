@@ -28,13 +28,21 @@ public class Main extends Application {
         Canvas simCanvas = (Canvas) scene.lookup("#simcanvas");
         MapDrawer canvasDrawer = new MapDrawer(simCanvas);
 
-
-        ReadFromFile.read("C:/Users/jakub/Desktop/sem2/jimp2/proj_II/proj_WW/src/WireWorld/test.txt");
-        //daj sobie swoją ścieżkę do pliku w module WireWorld
+        //Default map
+        ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
 
         canvasDrawer.drawEdges();
+        canvasDrawer.drawMap(Map.maps.size()-1);
 
-        canvasDrawer.drawMap(0);
+        SettingsController settingsController = new SettingsController(scene);
+        settingsController.enableListeners();
+        IOButtonsController ioController = new IOButtonsController(scene, primaryStage, canvasDrawer);
+        ioController.enableListeners();
+
+        SimulationStateController simStateController = new SimulationStateController(scene);
+        simStateController.enableListeners();
+
+
 
 
     }

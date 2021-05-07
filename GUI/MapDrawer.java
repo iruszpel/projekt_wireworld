@@ -17,6 +17,9 @@ public class MapDrawer {
     private int boxSize;
     private int lineWidth;
 
+    private int width;
+    private int height;
+
     private int c = Main.w;
     private int r = Main.h;
 
@@ -25,14 +28,14 @@ public class MapDrawer {
     public MapDrawer(Canvas canvas) {
         gc = canvas.getGraphicsContext2D();
 
-        int width = (int) canvas.getWidth();
-        int height = (int) canvas.getHeight();
+        width = (int) canvas.getWidth();
+        height = (int) canvas.getHeight();
 
         lineWidth = Math.min(2+(10/r)*2,2+(10/c)*2); //To durne ale zapewnia parzystą grubość linii, która jest potrzebna żeby kwadraty były faktycznie kwadratami
 
         System.out.println(lineWidth);
 
-        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  ((height/r) - lineWidth) : ((width / c) - lineWidth);
+        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  (height-3*lineWidth)/r : (width-3*lineWidth)/ c;
 
 
         computedHeight = boxSize*r;
@@ -67,7 +70,9 @@ public class MapDrawer {
         gc.fillRect(boxSize*x+offsetX+lineWidth/2,boxSize*y+offsetY+lineWidth/2,boxSize-lineWidth,boxSize-lineWidth);
 
     }
-
+    public void clearMap() {
+        gc.clearRect(0, 0, width, height);
+    }
     public void drawMap(int iteration){
         for(int y = 0; y < Map.height; y++){
             for(int x = 0; x < Map.width; x++){
