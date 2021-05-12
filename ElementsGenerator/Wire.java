@@ -20,7 +20,7 @@ public class Wire extends ElementsGenerator {
 
         Map mapa = Map.maps.get(Map.iteration);
         if(orientation.equals("Horizontal")) {
-            if (x + 4 >= Map.width || x < 0) {
+            if (x + 4 >= Generator.width || x < 0) {
                 System.out.println("Element nie zmieści się na mapie!");
             }
             else {
@@ -33,7 +33,7 @@ public class Wire extends ElementsGenerator {
         }
 
         else if (orientation.equals("Vertical")){
-            if(y + 4 >= Map.height || y < 0) {
+            if(y + 4 >= Generator.height || y < 0) {
                 System.out.println("Element nie zmieści się na mapie!");
             }
             else {

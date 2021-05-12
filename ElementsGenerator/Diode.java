@@ -21,7 +21,7 @@ public class Diode extends ElementsGenerator {
 
 
         Map mapa = Map.maps.get(Map.iteration);
-        if(x + 6 >= Map.width || x < 0 || y + 2 >= Map.height || y < 0){
+        if(x + 6 >= Generator.width || x < 0 || y + 2 >= Generator.height || y < 0){
             System.out.println("Element nie zmieści się na mapie!");
             // Dobrze byłoby zrobić okienko w gui na komunikaty
 

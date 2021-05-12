@@ -3,7 +3,7 @@ package ElementsGenerator;
 import Cell.Cell;
 import WireWorld.Map;
 
-public class Head extends ElementsGenerator {
+public class Empty extends ElementsGenerator {
 
 
     void generate(Cell cell){
@@ -11,7 +11,7 @@ public class Head extends ElementsGenerator {
         int y = cell.getY();
 
         Map mapa = Map.maps.get(Map.iteration);
-        mapa.setCell(y, x, 3);
+        mapa.setCell(y, x, 0);
 
     }
 

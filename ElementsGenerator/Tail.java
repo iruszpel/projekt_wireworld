@@ -1,6 +1,7 @@
 package ElementsGenerator;
 
 import Cell.Cell;
+import WireWorld.Map;
 
 public class Tail extends ElementsGenerator {
 
@@ -9,7 +10,8 @@ public class Tail extends ElementsGenerator {
         int x = cell.getX();
         int y = cell.getY();
 
-        //kod do generowania komórki
+        Map mapa = Map.maps.get(Map.iteration);
+        mapa.setCell(y, x, 2);
 
     }
 

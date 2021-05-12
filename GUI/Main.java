@@ -20,8 +20,8 @@ public class Main extends Application {
     public static int h = Map.height;
     public static int w = Map.width;
     public static int currentIteration = 0;
-    public static int howManyIterations = 20;
-    public static int animationSpeed = 1;
+    public static int howManyIterations = 30;
+    public static int animationSpeed = 4;
     public static MapDrawer canvasDrawer;
 
     @Override

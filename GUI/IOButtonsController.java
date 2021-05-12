@@ -44,9 +44,10 @@ public class IOButtonsController implements GUIController {
             try {
                 if (selectedFile == null)
                     return;
-                ReadFromFile.read(selectedFile.getAbsolutePath());
+                //ReadFromFile.read(selectedFile.getAbsolutePath());
                 Map.maps.clear();
                 Map.iteration = -1;
+                ReadFromFile.read(selectedFile.getAbsolutePath());
             } catch(Exception e) {
                 System.out.println("Nastąpił błąd przy wybieraniu pliku.");
                 return;

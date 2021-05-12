@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Map {
     public Cell map[][];
-    public static int height = 30;
-    public static int width = 36;
+    public static int height = 40;
+    public static int width = 48;
 
     public static int iteration = -1;
 
@@ -70,7 +70,7 @@ public class Map {
         for(int i = x-1; i < x+2; i++) {
             for( int j = y-1; j < y+2; j++){
                 if (i >= 0 && i < Map.width && j < Map.height && j >= 0){
-                    if(i != 0 && j != 0){
+                    if(!(i == x && j == y)){
                         if(getCell(j, i).getState() == 3){
                             count++;
                         }
