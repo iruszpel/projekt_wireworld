@@ -133,7 +133,7 @@
                   </Text>
                   <VBox prefHeight="137.0" prefWidth="150.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Głowa elektronu">
+                        <Button id="electronHeadButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Głowa elektronu">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -141,8 +141,8 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Ogon elektronu" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Przewodnik" />
+                        <Button id="electronTailButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Ogon elektronu" />
+                        <Button id="conductorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Przewodnik" />
                      </children>
                   </VBox>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bramki logiczne:">
@@ -152,15 +152,15 @@
                   </Text>
                   <VBox prefHeight="221.0" prefWidth="150.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="OR">
+                        <Button id="ORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="OR">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NOT" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="XOR" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NAND" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="AND" />
+                        <Button id="NOTGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NOT" />
+                        <Button id="XORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="XOR" />
+                        <Button id="NANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NAND" />
+                        <Button id="ANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="AND" />
                      </children>
                   </VBox>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Inne:">
@@ -170,7 +170,7 @@
                   </Text>
                   <VBox prefHeight="186.0" prefWidth="150.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Generator">
+                        <Button id="generatorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Generator">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>

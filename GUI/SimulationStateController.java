@@ -20,10 +20,8 @@ public class SimulationStateController implements GUIController {
         iterSlider.setMax(Main.howManyIterations);
         iterSlider.setMajorTickUnit(Main.howManyIterations/5);
         iterSlider.setOnMouseReleased(event -> {
-            Main.canvasDrawer.clearMap();
-            Main.canvasDrawer.drawEdges();
             Main.currentIteration = (int)iterSlider.getValue();
-            Main.canvasDrawer.drawMap(Main.currentIteration);
+            Main.canvasDrawer.drawIteration(Main.currentIteration);
         });
 
         ImageView playPauseButton = (ImageView) scene.lookup("#playPauseButton");

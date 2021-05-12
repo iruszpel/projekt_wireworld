@@ -54,9 +54,7 @@ public class IOButtonsController implements GUIController {
             }
 
             Main.generateIterations(Main.howManyIterations);
-            Main.canvasDrawer.clearMap();
-            Main.canvasDrawer.drawEdges();
-            Main.canvasDrawer.drawMap(0);
+            Main.canvasDrawer.drawIteration(0);
 
             openFileText.setText("Wczytany plik: " + selectedFile.getName());
 

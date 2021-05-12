@@ -55,10 +55,8 @@ public class SettingsController implements GUIController {
                         iterSlider.setMax(Main.howManyIterations);
                         iterSlider.setValue(0);
                         iterSlider.setMajorTickUnit(Main.howManyIterations/5);
-                        //Reset current drawing
-                        Main.canvasDrawer.clearMap();
-                        Main.canvasDrawer.drawEdges();
-                        Main.canvasDrawer.drawMap(0);
+                        //Reset current iterations
+                        Main.canvasDrawer.drawIteration(0);
                     }
         });
         animationSpeedField.focusedProperty().addListener((obs, oldVal, newVal) -> {

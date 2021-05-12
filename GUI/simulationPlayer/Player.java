@@ -64,8 +64,8 @@ class PausedState extends SimulationState {
         player.t.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(Main.currentIteration == Map.iteration-1)
-                    Main.currentIteration = 0;
+                if(Main.currentIteration == Main.howManyIterations)
+                    Main.currentIteration = -1;
                 player.clickNext();
             }
         }, 0, 1000/Main.animationSpeed);

@@ -50,6 +50,9 @@ public class Main extends Application {
         IOButtonsController ioController = new IOButtonsController(scene, primaryStage);
         ioController.enableListeners();
 
+        AddButtonsController addButtonsController = new AddButtonsController(scene);
+        addButtonsController.enableListeners();
+
         SimulationStateController simStateController = new SimulationStateController(scene);
         simStateController.enableListeners();
 

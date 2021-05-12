@@ -5,6 +5,7 @@ import WireWorld.Map;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 
 public class MapDrawer {
     private GraphicsContext gc;
@@ -70,8 +71,23 @@ public class MapDrawer {
         gc.fillRect(boxSize*x+offsetX+lineWidth/2,boxSize*y+offsetY+lineWidth/2,boxSize-lineWidth,boxSize-lineWidth);
 
     }
+    public Pair<Integer, Integer> getCoordsFromXY(int x, int y) {
+        int nx = (x-offsetX-lineWidth/2)/boxSize;
+        int ny = (y-offsetY-lineWidth/2)/boxSize;
+
+        return new Pair<>(nx, ny); //Te pary z javafx są słabe bo to jest key-value, ale jakoś działają
+    }
+    public void getColorFromXY(int x, int y) {
+
+    }
     public void clearMap() {
         gc.clearRect(0, 0, width, height);
+    }
+    public void drawIteration(int iteration){
+        clearMap();
+        drawEdges();
+        drawMap(iteration);
+
     }
     public void drawMap(int iteration){
         for(int y = 0; y < Map.height; y++){
