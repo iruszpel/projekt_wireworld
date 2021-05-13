@@ -8,6 +8,7 @@ import Cell.Conductor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Map {
     public Cell map[][];
@@ -61,7 +62,12 @@ public class Map {
         }
         map[y][x] = cell;
     }
-
+    public Cell[][] deepCopyMap(){
+        Cell[][] nv = new Cell[height][width];
+        for (int i = 0; i < nv.length; i++)
+            nv[i] = Arrays.copyOf(map[i], map[i].length);
+        return nv;
+    }
     //liczenie sąsiednich głów elektronów
     public int countNeighbours(Cell c){
         int count = 0;

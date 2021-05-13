@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
@@ -121,7 +122,7 @@
                   </ImageView>
                </children>
             </TilePane>
-            <VBox layoutX="11.0" layoutY="110.0" prefHeight="583.0" prefWidth="150.0" stylesheets="@css/side_buttons.css">
+            <VBox id="addElementsBox" layoutX="11.0" layoutY="110.0" prefHeight="475.0" prefWidth="150.0" styleClass=".addElementsBox" stylesheets="@css/side_buttons.css">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Podstawowe:">
                      <font>
@@ -140,9 +141,21 @@
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="basicElemButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass>
                         </Button>
-                        <Button id="electronTailButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Ogon elektronu" />
-                        <Button id="conductorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Przewodnik" />
+                        <Button id="electronTailButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Ogon elektronu">
+                           <styleClass>
+                              <String fx:value="basicElemButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
+                        <Button id="conductorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Przewodnik">
+                           <styleClass>
+                              <String fx:value="basicElemButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
                      </children>
                   </VBox>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Bramki logiczne:">
@@ -150,17 +163,37 @@
                         <Font size="13.0" />
                      </font>
                   </Text>
-                  <VBox prefHeight="221.0" prefWidth="150.0" spacing="20.0">
+                  <VBox id="addGatesBox" prefHeight="221.0" prefWidth="150.0" spacing="20.0">
                      <children>
                         <Button id="ORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="OR">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <styleClass>
+                              <String fx:value="gateButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass>
                         </Button>
-                        <Button id="NOTGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NOT" />
-                        <Button id="XORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="XOR" />
-                        <Button id="NANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NAND" />
-                        <Button id="ANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="AND" />
+                        <Button id="NOTGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NOT">
+                           <styleClass>
+                              <String fx:value="gateButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
+                        <Button id="XORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="XOR">
+                           <styleClass>
+                              <String fx:value="gateButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
+                        <Button id="NANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="NAND (To do)">
+                           <styleClass>
+                              <String fx:value="gateButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
+                        <Button id="ANDGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="AND">
+                           <styleClass>
+                              <String fx:value="gateButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass></Button>
                      </children>
                   </VBox>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Inne:">
@@ -168,12 +201,16 @@
                         <Font size="13.0" />
                      </font>
                   </Text>
-                  <VBox prefHeight="186.0" prefWidth="150.0" spacing="20.0">
+                  <VBox prefHeight="55.0" prefWidth="150.0" spacing="20.0">
                      <children>
                         <Button id="generatorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Generator">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <styleClass>
+                              <String fx:value="otherElemButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass>
                         </Button>
                      </children>
                   </VBox>
@@ -288,6 +325,72 @@
                   <DropShadow />
                </effect>
             </AnchorPane>
+            <ImageView id="undoButton" fitHeight="31.0" fitWidth="28.0" layoutX="14.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/outline_undo_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.6" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ImageView>
+            <ImageView disable="true" fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@resources/outline_redo_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.6" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="topButton" fitHeight="33.0" fitWidth="36.0" layoutX="67.0" layoutY="589.0" pickOnBounds="true" preserveRatio="true" styleClass="directionButton">
+               <image>
+                  <Image url="@resources/outline_arrow_upward_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="rightButton" fitHeight="33.0" fitWidth="36.0" layoutX="88.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" styleClass="directionButton">
+               <image>
+                  <Image url="@resources/outline_arrow_upward_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="bottomButton" fitHeight="33.0" fitWidth="36.0" layoutX="67.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" styleClass="directionButton">
+               <image>
+                  <Image url="@resources/outline_arrow_upward_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="leftButton" fitHeight="33.0" fitWidth="36.0" layoutX="45.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" styleClass="directionButton">
+               <image>
+                  <Image url="@resources/outline_arrow_upward_black_24dp.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
       </children>
     </AnchorPane>
   </children>

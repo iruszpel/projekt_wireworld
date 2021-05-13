@@ -3,10 +3,10 @@ package ElementsGenerator;
 import Cell.Cell;
 import WireWorld.Map;
 
-public class Tail extends ElementsGenerator {
+public class Tail extends BasicElementsGenerator {
 
 
-    void generate(Cell cell){
+    public void generate(Cell cell){
         int x = cell.getX();
         int y = cell.getY();
 

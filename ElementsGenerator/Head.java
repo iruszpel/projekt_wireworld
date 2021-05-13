@@ -3,7 +3,7 @@ package ElementsGenerator;
 import Cell.Cell;
 import WireWorld.Map;
 
-public class Head extends ElementsGenerator {
+public class Head extends BasicElementsGenerator {
 
 
     public void generate(Cell cell){

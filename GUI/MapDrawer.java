@@ -2,13 +2,21 @@ package GUI;
 
 import Cell.Cell;
 import WireWorld.Map;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
+
 public class MapDrawer {
     private GraphicsContext gc;
+    private Canvas canvas;
+
     private int computedHeight;
     private int computedWidth;
 
@@ -24,10 +32,13 @@ public class MapDrawer {
     private int c = Main.w;
     private int r = Main.h;
 
+    public static Stack<ArrayList<Map>> historyStack = new Stack<>();
 
+    public static HashMap<Integer, Color> colorMap = new HashMap<>();
 
     public MapDrawer(Canvas canvas) {
         gc = canvas.getGraphicsContext2D();
+        this.canvas = canvas;
 
         width = (int) canvas.getWidth();
         height = (int) canvas.getHeight();
@@ -44,6 +55,12 @@ public class MapDrawer {
 
         offsetX= (width-computedWidth)/2+lineWidth;
         offsetY= (height-computedHeight)/2+lineWidth;
+
+
+        colorMap.put(0, Color.rgb(0,0,0, 0.1));
+        colorMap.put(1, Color.rgb(255, 215, 0));
+        colorMap.put(2, Color.RED);
+        colorMap.put(3, Color.BLUE);
 
 
     }
@@ -80,6 +97,16 @@ public class MapDrawer {
     public void getColorFromXY(int x, int y) {
 
     }
+    //Undo i redo do stanu mapy
+    public void saveMapState() {
+        ArrayList<Map> historyList = (ArrayList<Map>) Map.maps.clone(); //Make a copy of map list
+        historyStack.push(historyList);
+    }
+    public void restoreMapState() {
+        Map.maps = (ArrayList<Map>) historyStack.pop().clone();
+        drawIteration(0);
+
+    }
     public void clearMap() {
         gc.clearRect(0, 0, width, height);
     }
@@ -93,26 +120,7 @@ public class MapDrawer {
         for(int y = 0; y < Map.height; y++){
             for(int x = 0; x < Map.width; x++){
                 int c = Map.maps.get(iteration).getCell(y, x).getState();
-                switch(c){
-                    case 0: {
-                        drawAtXY(x,y, Color.rgb(0,0,0, 0.1)); //transparentny kolor
-                        break;
-                    }
-                    case 1: {
-                        drawAtXY(x,y, Color.rgb(255, 215, 0));
-                        break;
-                    }
-                    case 2: {
-                        drawAtXY(x,y, Color.RED);
-                        break;
-                    }
-                    case 3: {
-                        drawAtXY(x,y, Color.BLUE);
-                        break;
-                    }
-
-
-                }
+                drawAtXY(x,y, colorMap.get(c));
             }
         }
     }
