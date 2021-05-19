@@ -37,12 +37,15 @@ public class Main extends Application {
         canvasDrawer = new MapDrawer(simCanvas);
 
         //Default map
-        ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
+
+        //ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
+        ReadFromFile.read(getClass().getResource("/WireWorld/testSerializable.ser").getPath());
+        //ReadFromFile.read("testSerializable.ser");
 
         generateIterations(howManyIterations);
 
         canvasDrawer.drawEdges();
-        canvasDrawer.drawMap(currentIteration);
+       canvasDrawer.drawMap(currentIteration);
 
 
         SettingsController settingsController = new SettingsController(scene);

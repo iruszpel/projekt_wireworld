@@ -87,23 +87,4 @@ public class Map {
 
         return count;
     }
-    public static void main(String[] args) throws FileNotFoundException {
-        int h = 10;
-        int w = 10;
-
-        ReadFromFile.read("/Users/jakub/Desktop/test.txt");
-
-
-        Map mapa0 = Map.maps.get(0);
-
-        for (int y = 0; y < h; y++){
-            for( int x =0; x < w; x++){
-                System.out.print(mapa0.map[y][x].getState() + " ");
-            }
-            System.out.println();
-        }
-
-
-
-    }
 }

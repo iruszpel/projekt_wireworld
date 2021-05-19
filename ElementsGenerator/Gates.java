@@ -27,19 +27,10 @@ public class Gates extends ElementsGenerator {
             {0,1,0,1,0,0,0,0,1,1,1,0,0,1},
             {0,1,0,1,0,0,0,0,0,1,0,1,1,0},
             {0,0,1,0,0,0,0,0,0,0,0,0,0,0}};
-    /* ten AND nie działa
-    static int[][] ANDmodel = {
-            {1,0,0,0,0,0,0},
-            {0,1,0,1,0,0,0},
-            {1,1,1,1,1,0,1},
-            {0,1,0,1,0,1,0},
-            {0,1,0,0,0,1,0},
-            {0,0,1,1,1,0,0},
-            {1,1,0,0,0,0,0}};*/
     static int[][] NOTmodel = {
             {0,0,1,0,0},
             {1,1,1,1,1},
-            {0,0,1,0,0},};
+            {0,0,1,0,0}};
 
     public static void generate(Cell cell, String gate){
         //System.out.println(gate);
@@ -49,8 +40,8 @@ public class Gates extends ElementsGenerator {
         switch(gate) {
             case "OR": {
 
-                if (x + ORmodel[0].length >= Generator.width || x < 0 || y + ORmodel.length >= Generator.height || y < 0) {
-                    System.out.println("Element nie zmieści się na mapie!");
+                if (x + ORmodel[0].length > Generator.width || x < 0 || y + ORmodel.length > Generator.height || y < 0) {
+                    System.err.println("Element nie zmieści się na mapie!");
                     // Dobrze byłoby zrobić okienko w gui na komunikaty
 
                 } else {
@@ -59,12 +50,11 @@ public class Gates extends ElementsGenerator {
                             mapa.setCell(y + i, x + j, ORmodel[i][j]); // przekopiowanie macierzy na mape
                         }
                     }
-
-                    break;
                 }
+                break;
             }
                 case "AND": {
-                    if (x + ANDmodel[0].length >= Generator.width || x < 0 || y + ANDmodel.length >= Generator.height || y < 0) {
+                    if (x + ANDmodel[0].length > Generator.width || x < 0 || y + ANDmodel.length > Generator.height || y < 0) {
                         System.out.println("Element nie zmieści się na mapie!");
                         // Dobrze byłoby zrobić okienko w gui na komunikaty
 
@@ -78,7 +68,8 @@ public class Gates extends ElementsGenerator {
                     break;
                 }
                 case "XOR": {
-                    if (x + XORmodel[0].length >= Generator.width || x < 0 || y + XORmodel.length >= Generator.height || y < 0) {
+                    y--;
+                    if (x + XORmodel[0].length > Generator.width || x < 0 || y + XORmodel.length > Generator.height || y < 0) {
                         System.out.println("Element nie zmieści się na mapie!");
                         // Dobrze byłoby zrobić okienko w gui na komunikaty
 
@@ -93,7 +84,7 @@ public class Gates extends ElementsGenerator {
                 }
                 case "NOT": {
                     y--;
-                    if (x + NOTmodel[0].length >= Generator.width || x < 0 || y + NOTmodel.length >= Generator.height || y < 0) {
+                    if (x + NOTmodel[0].length > Generator.width || x < 0 || y + NOTmodel.length > Generator.height || y < 0) {
                         System.out.println("Element nie zmieści się na mapie!");
                         // Dobrze byłoby zrobić okienko w gui na komunikaty
 

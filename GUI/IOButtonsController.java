@@ -2,6 +2,7 @@ package GUI;
 
 import WireWorld.Map;
 import WireWorld.ReadFromFile;
+import WireWorld.Write2File;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -44,7 +45,7 @@ public class IOButtonsController implements GUIController {
             try {
                 if (selectedFile == null)
                     return;
-                //ReadFromFile.read(selectedFile.getAbsolutePath());
+
                 Map.maps.clear();
                 Map.iteration = -1;
                 ReadFromFile.read(selectedFile.getAbsolutePath());
