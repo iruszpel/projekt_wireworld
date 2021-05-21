@@ -38,8 +38,8 @@ public class Main extends Application {
 
         //Default map
 
-        //ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
-        ReadFromFile.read(getClass().getResource("/WireWorld/testSerializable.ser").getPath());
+        ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
+        //ReadFromFile.read(getClass().getResource("/WireWorld/testSerializable.ser").getPath());
         //ReadFromFile.read("testSerializable.ser");
 
         generateIterations(howManyIterations);

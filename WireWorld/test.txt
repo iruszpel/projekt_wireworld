@@ -1,33 +1,35 @@
-Generator: 1, 1, 0
-Generator: 6, 1, 0
-Gate: 2, 8, OR
-Wire: 4, 12, Horizontal
+Generator: 2, 1, right
+Generator: 6, 1, right
+OR: 2, 8, right
+Wire: 4, 12, right
 
-Generator: 2, 19, 0
-Generator: 6, 19, 3
-Gate: 2, 26, OR
-Wire: 4, 30, Horizontal
+Conductor: 0, 0
 
-Generator: 12, 1, 0
-Generator: 16, 1, 0
-Gate: 11, 8, XOR
-Wire: 14, 13, Horizontal
+Generator: 2, 19, right
+Generator: 6, 19, left
+OR: 2, 26, right
+Wire: 4, 30, right
 
-Generator: 12, 19, 0
-Generator: 16, 19, 3
-Gate: 11, 26, XOR
-Wire: 14, 30, Horizontal
+Generator: 11, 1, right
+Generator: 15, 1, right
+XOR: 11, 8, right
+Wire: 13, 13, right
 
-Generator: 21, 1, 0
-Generator: 25, 1, 0
-Gate: 21, 8, AND
-Wire: 26, 22, Horizontal
+Generator: 11, 19, right
+Generator: 15, 19, left
+XOR: 11, 26, right
+Wire: 13, 30, right
+
+Generator: 21, 1, right
+Generator: 25, 1, right
+AND: 21, 8, right
+Wire: 26, 22, right
 Gate: 26, 25, NOT
 
-Generator: 34, 1, 0
-Gate: 31, 8, AND
-Wire: 36, 21, Horizontal
+Generator: 34, 1, right
+AND: 31, 8, right
+Wire: 36, 21, right
 
-Generator: 31, 21, 0
-Gate: 31, 28, AND
-Wire: 36, 42, Horizontal
+Generator: 31, 21, right
+AND: 31, 28, right
+Wire: 36, 42, right

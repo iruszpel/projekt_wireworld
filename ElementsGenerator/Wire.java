@@ -13,22 +13,33 @@ public class Wire extends ElementsGenerator {
             {1},
             {1}};
 
-    public static void generate(Cell cell, String orientation){
+    public static void generate(Cell cell, String facing){
         int x = cell.getX();
         int y = cell.getY();
 
 
-        Map mapa = Map.maps.get(Map.iteration);
-        switch(orientation){
-            case "Horizontal":{
+        switch(facing){
+            case "up":{
+                if(ElementsGenerator.gonnaFit(WireVerticalModel, y, x)){
+                    generateModel(WireVerticalModel, y, x);
+                }
+                break;
+            }
+            case "down":{
+                if(ElementsGenerator.gonnaFit(WireVerticalModel, y, x)){
+                    generateModel(WireVerticalModel, y, x);
+                }
+                break;
+            }
+            case "right":{
                 if(ElementsGenerator.gonnaFit(WireHorizontalModel, y, x)){
                     generateModel(WireHorizontalModel, y, x);
                 }
                 break;
             }
-            case "Vertical":{
-                if(ElementsGenerator.gonnaFit(WireVerticalModel, y, x)){
-                    generateModel(WireVerticalModel, y, x);
+            case "left":{
+                if(ElementsGenerator.gonnaFit(WireHorizontalModel, y, x)){
+                    generateModel(WireHorizontalModel, y, x);
                 }
                 break;
             }

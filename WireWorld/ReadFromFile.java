@@ -1,10 +1,7 @@
 package WireWorld;
 
 import Cell.Cell;
-import ElementsGenerator.Diode;
-import ElementsGenerator.Gates;
-import ElementsGenerator.Generator;
-import ElementsGenerator.Wire;
+import ElementsGenerator.*;
 
 import java.io.*;
 import java.util.Scanner;
@@ -35,46 +32,49 @@ public class ReadFromFile {
                     String elem = scan.next().replaceAll(",", "").replaceAll(":", "");
                     int y = Integer.parseInt(scan.next().replaceAll(",", "").replaceAll(":", ""));
                     int x = Integer.parseInt(scan.next().replaceAll(",", "").replaceAll(":", ""));
-
+                    String facing = "right";
+                    if(!(elem.equals("ElectronHead") || elem.equals("ElectronTail") ||elem.equals("Conductor") || elem.equals("Diode"))){
+                        facing = scan.next().replaceAll(",", "").replaceAll(":", "");
+                    }
                     switch (elem) {
                         case "ElectronHead": {
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                             mapa.setCell(y, x, 3);
                             break;
                         }
                         case "ElectronTail": {
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                             mapa.setCell(y, x, 2);
                             break;
                         }
                         case "Conductor": {
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
                             mapa.setCell(y, x, 1);
                             break;
                         }
                         case "Diode": {
-                            String facing = scan.next().replaceAll(",", "").replaceAll(":", "");
-                            //System.out.printf("Elem=%s, y=%s, x=%s, facing=%s\n", elem, y, x, facing);
                             Diode.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "Generator": {
-                            String tick = scan.next().replaceAll(",", "").replaceAll(":", "");
-
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
-                            Generator.generate(mapa.getCell(y, x), tick);
+                            Generator.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "Wire": {
-                            String orientation = scan.next().replaceAll(",", "").replaceAll(":", "");
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
-                            Wire.generate(mapa.getCell(y, x), orientation);
+                            Wire.generate(mapa.getCell(y, x), facing);
                             break;
                         }
-                        case "Gate": {
-                            String gate = scan.next().replaceAll(",", "").replaceAll(":", "");
-                            //System.out.printf("Elem=%s, y=%s, x=%s\n", elem, y, x);
-                            Gates.generate(mapa.getCell(y, x), gate);
+                        case "OR": {
+                            OR.generate(mapa.getCell(y, x), facing);
+                            break;
+                        }
+                        case "XOR": {
+                            XOR.generate(mapa.getCell(y, x), facing);
+                            break;
+                        }
+                        case "AND": {
+                            AND.generate(mapa.getCell(y, x), facing);
+                            break;
+                        }
+                        case "NOT": {
+                            NOT.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                     }
