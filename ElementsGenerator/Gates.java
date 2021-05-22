@@ -1,5 +1,6 @@
 package ElementsGenerator;
-
+//DEPRECATED
+//DO  NOT USE
 import Cell.Cell;
 import WireWorld.Map;
 
@@ -32,7 +33,7 @@ public class Gates extends ElementsGenerator {
             {1,1,1,1,1},
             {0,0,1,0,0}};
 
-    public static void generate(Cell cell, String gate){
+    public void generate(Cell cell, String gate){
         int x = cell.getX();
         int y = cell.getY();
 

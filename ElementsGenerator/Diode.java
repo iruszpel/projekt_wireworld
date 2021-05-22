@@ -29,7 +29,7 @@ public class Diode extends ElementsGenerator {
             {0, 1, 0},
             {0, 1, 0}};
 
-    public static void generate(Cell cell, String facing){
+    public void generate(Cell cell, String facing){
         int x = cell.getX();
         int y = cell.getY() - 1; //ustawienie punktu początkowego na komórkę[0][0] modelu
 

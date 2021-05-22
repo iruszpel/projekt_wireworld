@@ -13,7 +13,7 @@ public class Wire extends ElementsGenerator {
             {1},
             {1}};
 
-    public static void generate(Cell cell, String facing){
+    public void generate(Cell cell, String facing){
         int x = cell.getX();
         int y = cell.getY();
 

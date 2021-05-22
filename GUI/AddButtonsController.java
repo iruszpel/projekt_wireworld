@@ -32,12 +32,10 @@ public class AddButtonsController implements GUIController {
     private Slider iterSlider;
     private VBox addElementsBox;
 
-    private String elementType;
-    private String gateType;
-    private String basicElemType;
-    private String otherElemType;
+    private String elemType;
+    private String facingSide = "right"; //Default facing
 
-    private HashMap<String, BasicElementsGenerator> elementTypesMap = new HashMap<>();
+    private HashMap<String, ElementsGenerator> elementTypesMap = new HashMap<>();
 
 
     public AddButtonsController(Scene scene) {
@@ -50,7 +48,17 @@ public class AddButtonsController implements GUIController {
         this.elementTypesMap.put("electronHead", new Head());
         this.elementTypesMap.put("electronTail", new Tail());
         this.elementTypesMap.put("conductor", new Conductor());
+        this.elementTypesMap.put("empty", new Empty());
 
+        this.elementTypesMap.put("ORGate", new OR());
+        this.elementTypesMap.put("NOTGate", new NOT());
+        this.elementTypesMap.put("XORGate", new XOR());
+        this.elementTypesMap.put("ANDGate", new AND());
+
+        this.elementTypesMap.put("generator", new Generator());
+        this.elementTypesMap.put("wire", new Wire());
+
+        focusDirectionButton();
 
     }
     private void onAddClick(Node tempNode){
@@ -88,58 +96,40 @@ public class AddButtonsController implements GUIController {
     @Override
     public void enableListeners() {
 
-        Set<Node> gateButtons = addElementsBox.lookupAll(".gateButton");
-        //LOGIC GATES
-        for (Node button : gateButtons) {
+        Set<Node> addButtons = addElementsBox.lookupAll(".addElemButton");
+        //All add buttons
+        for (Node button : addButtons) {
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
                 onAddClick(button);
-                elementType = "GATE";
-                //Find gate type with regex
-                String id = button.getId();
-                Pattern r = Pattern.compile("^.*(?=(GateButton))");
-                Matcher m = r.matcher(id);
-                m.find();
-                gateType = m.group(0);
-
-
-            });
-        }
-        //BASIC ELEMENTS
-        Set<Node> basicElements = addElementsBox.lookupAll(".basicElemButton");
-        for (Node button : basicElements) {
-            button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                onAddClick(button);
-                elementType = "BASIC";
-                //Find element type with regex
+                //Find button type with regex
                 String id = button.getId();
                 Pattern r = Pattern.compile("^.*(?=(Button))");
                 Matcher m = r.matcher(id);
                 m.find();
-                basicElemType = m.group(0);
+                elemType = m.group(0);
 
 
             });
         }
 
-        //OTHER ELEMENTS
-        Set<Node> otherElements = addElementsBox.lookupAll(".otherElemButton");
-        for (Node button : otherElements) {
+
+        Set<Node> directionButtons = scene.getRoot().lookupAll(".directionButton");
+        //All direction arrows
+        for (Node button : directionButtons) {
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                onAddClick(button);
-                elementType = "OTHER";
-                //Find element type with regex
+
+                //Find direction with regex
                 String id = button.getId();
                 Pattern r = Pattern.compile("^.*(?=(Button))");
                 Matcher m = r.matcher(id);
                 m.find();
-                otherElemType = m.group(0);
-
+                facingSide = m.group(0);
+                focusDirectionButton();
+                System.out.println(facingSide);
 
             });
         }
-
-
 
         undoButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if(!undoEnabled)
@@ -153,7 +143,7 @@ public class AddButtonsController implements GUIController {
                 disableUndoButton();
             }
         });
-
+        //User clicked on canvas while element selection was active
         simCanvas.setOnMouseClicked(mouseEvent -> {
             if (!isInAddingMode)
                 return;
@@ -176,26 +166,8 @@ public class AddButtonsController implements GUIController {
 
             //Add new element
             Cell tempCell = Map.maps.get(0).getCell(coords.getValue(), coords.getKey());
-            switch(elementType) {
-                case "GATE": {
-                    Gates elem = new Gates();
-                    elem.generate(tempCell, gateType);
-                    break;
-                }
-                case "BASIC": {
-                    BasicElementsGenerator elem = elementTypesMap.get(basicElemType);
-                    elem.generate(tempCell);
-                    break;
-                }
-                case "OTHER": {
-                    if (otherElemType.equals("generator")){
-                        Generator elem = new Generator();
-                        elem.generate(tempCell, "0");
-                        break;
-                    }
-                }
-            }
-
+            ElementsGenerator elem = elementTypesMap.get(elemType);
+            elem.generate(tempCell, facingSide);
 
             //Generate iterations based on new 0th iteration
             Main.generateIterations(Main.howManyIterations);
@@ -217,5 +189,23 @@ public class AddButtonsController implements GUIController {
             undoButton.setEffect(tempEffect);
             undoButton.setCursor(Cursor.DEFAULT);
         }
+        private void focusDirectionButton(){
+            unfocusDirectionButtons();
+            ColorAdjust tempEffect = new ColorAdjust();
+            tempEffect.setBrightness(0.6);
+            Node directionButton = scene.getRoot().lookup("#"+facingSide+"Button");
+            directionButton.setEffect(tempEffect);
+        }
+        private void unfocusDirectionButtons(){
+            ColorAdjust tempEffect = new ColorAdjust();
+            tempEffect.setBrightness(1.0);
+            Set<Node> directionButtons = scene.getRoot().lookupAll(".directionButton");
+            //All direction arrows
+            for (Node button : directionButtons) {
+                button.setEffect(tempEffect);
+            }
+
+        }
+
 }
 

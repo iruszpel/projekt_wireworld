@@ -50,31 +50,38 @@ public class ReadFromFile {
                             break;
                         }
                         case "Diode": {
-                            Diode.generate(mapa.getCell(y, x), facing);
+                            Diode newDiode = new Diode();
+                            newDiode.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "Generator": {
-                            Generator.generate(mapa.getCell(y, x), facing);
+                            Generator newGenerator = new Generator();
+                            newGenerator.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "Wire": {
-                            Wire.generate(mapa.getCell(y, x), facing);
+                            Wire newWire = new Wire();
+                            newWire.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "OR": {
-                            OR.generate(mapa.getCell(y, x), facing);
+                            OR newOR = new OR();
+                            newOR.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "XOR": {
-                            XOR.generate(mapa.getCell(y, x), facing);
+                            XOR newXOR = new XOR();
+                            newXOR.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "AND": {
-                            AND.generate(mapa.getCell(y, x), facing);
+                            AND newAND = new AND();
+                            newAND.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                         case "NOT": {
-                            NOT.generate(mapa.getCell(y, x), facing);
+                            NOT newNOT = new NOT();
+                            newNOT.generate(mapa.getCell(y, x), facing);
                             break;
                         }
                     }

@@ -1,5 +1,6 @@
 package ElementsGenerator;
 
+import Cell.Cell;
 import WireWorld.Map;
 
 public class ElementsGenerator {
@@ -23,4 +24,5 @@ public class ElementsGenerator {
             }
         }
     }
+    public void generate(Cell cell, String facing) {}
 }

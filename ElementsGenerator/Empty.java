@@ -5,8 +5,7 @@ import WireWorld.Map;
 
 public class Empty extends ElementsGenerator {
 
-
-    void generate(Cell cell){
+    public void generate(Cell cell, String facing){
         int x = cell.getX();
         int y = cell.getY();
 
