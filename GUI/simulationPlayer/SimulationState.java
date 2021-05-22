@@ -12,10 +12,8 @@ public abstract class SimulationState {
 
     public void nextIteration() {
         if(Main.currentIteration < Map.iteration){
-            Main.canvasDrawer.clearMap();
-            Main.canvasDrawer.drawEdges();
             Main.currentIteration++;
-            Main.canvasDrawer.drawMap(Main.currentIteration);
+            Main.canvasDrawer.drawIteration(Main.currentIteration);
             player.iterSlider.setValue(Main.currentIteration);
         }
 
@@ -24,10 +22,8 @@ public abstract class SimulationState {
 
     public void previousIteration() {
         if(Main.currentIteration > 0) {
-            Main.canvasDrawer.clearMap();
-            Main.canvasDrawer.drawEdges();
             Main.currentIteration--;
-            Main.canvasDrawer.drawMap(Main.currentIteration);
+            Main.canvasDrawer.drawIteration(Main.currentIteration);
             player.iterSlider.setValue(Main.currentIteration);
         }
     }

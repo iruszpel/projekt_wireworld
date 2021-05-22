@@ -27,12 +27,19 @@ public class IOButtonsController implements GUIController {
         saveButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             FileChooser fileChooser = new FileChooser();
 
-            FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Plik tekstowy (*.txt)", "*.txt");
+            FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Plik stanu mapy (*.ser)", "*.ser");
             FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Obraz png (*.png)", "*.png");
-            fileChooser.getExtensionFilters().add(textFilter);
-            fileChooser.getExtensionFilters().add(imageFilter);
+            if (SettingsController.fileFormat == "ser") fileChooser.getExtensionFilters().add(textFilter);
+            if (SettingsController.fileFormat == "png") fileChooser.getExtensionFilters().add(imageFilter);
 
             File selectedFile = fileChooser.showSaveDialog(stage);
+            if (selectedFile == null)
+                return;
+
+            if (SettingsController.fileFormat == "ser")
+                Write2File.WriteObjectToFile(Map.maps.get(Main.currentIteration).map, selectedFile.getAbsolutePath());
+            if (SettingsController.fileFormat == "png")
+                Main.canvasDrawer.saveMapToImage(selectedFile);
             event.consume();
         });
 
@@ -48,6 +55,7 @@ public class IOButtonsController implements GUIController {
 
                 Map.maps.clear();
                 Map.iteration = -1;
+                Main.currentFilePath = selectedFile.getAbsolutePath();
                 ReadFromFile.read(selectedFile.getAbsolutePath());
             } catch(Exception e) {
                 System.out.println("Nastąpił błąd przy wybieraniu pliku.");
@@ -59,6 +67,15 @@ public class IOButtonsController implements GUIController {
 
             openFileText.setText("Wczytany plik: " + selectedFile.getName());
 
+            event.consume();
+        });
+        ImageView clearMapButton = (ImageView) scene.lookup("#clearMapButton");
+        clearMapButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            Map.maps.clear();
+            Map.iteration = -1;
+            new Map(Main.h,Main.w);
+            Main.generateIterations(Main.howManyIterations);
+            Main.canvasDrawer.drawIteration(0);
             event.consume();
         });
 

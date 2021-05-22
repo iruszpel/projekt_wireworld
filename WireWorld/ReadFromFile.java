@@ -15,7 +15,8 @@ public class ReadFromFile {
     private static String extension;
 
     public static void read(String path) throws IOException, FileNotFoundException, ClassNotFoundException {
-
+        h = Map.height; //Trzeba przy każdym wczytywaniu pliku zaktualizować te wartości bo użytkownik może je zmieniać
+        w = Map.width;
         try {
             File file = new File(path);
             scan = new Scanner(file);

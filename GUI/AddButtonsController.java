@@ -126,7 +126,6 @@ public class AddButtonsController implements GUIController {
                 m.find();
                 facingSide = m.group(0);
                 focusDirectionButton();
-                System.out.println(facingSide);
 
             });
         }

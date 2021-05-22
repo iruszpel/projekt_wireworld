@@ -9,9 +9,14 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+import javax.imageio.ImageIO;
+import javafx.embed.swing.SwingFXUtils;
+
 
 public class MapDrawer {
     private GraphicsContext gc;
@@ -40,22 +45,7 @@ public class MapDrawer {
         gc = canvas.getGraphicsContext2D();
         this.canvas = canvas;
 
-        width = (int) canvas.getWidth();
-        height = (int) canvas.getHeight();
-
-        lineWidth = Math.min(2+(10/r)*2,2+(10/c)*2); //To durne ale zapewnia parzystą grubość linii, która jest potrzebna żeby kwadraty były faktycznie kwadratami
-
-        //System.out.println(lineWidth);
-
-        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  (height-3*lineWidth)/r : (width-3*lineWidth)/ c;
-
-
-        computedHeight = boxSize*r;
-        computedWidth = boxSize*c;
-
-        offsetX= (width-computedWidth)/2+lineWidth;
-        offsetY= (height-computedHeight)/2+lineWidth;
-
+        updateInternalValues();
 
         colorMap.put(0, Color.rgb(0,0,0, 0.1));
         colorMap.put(1, Color.rgb(255, 215, 0));
@@ -64,9 +54,24 @@ public class MapDrawer {
 
 
     }
-    public void drawEdges( ) {
+    private void updateInternalValues(){
+        c = Main.w;
+        r = Main.h;
 
+        width = (int) canvas.getWidth();
+        height = (int) canvas.getHeight();
 
+        lineWidth = Math.min(2+(10/r)*2,2+(10/c)*2); //To durne ale zapewnia parzystą grubość linii, która jest potrzebna żeby kwadraty były faktycznie kwadratami
+        boxSize = ((double) c/(double)r) < ((double) width/(double)height) ?  (height-3*lineWidth)/r : (width-3*lineWidth)/ c;
+
+        computedHeight = boxSize*r;
+        computedWidth = boxSize*c;
+
+        offsetX= (width-computedWidth)/2+lineWidth;
+        offsetY= (height-computedHeight)/2+lineWidth;
+
+    }
+    private void drawEdges( ) {
 
         gc.setLineWidth(lineWidth);
         gc.setStroke(Color.WHITE);
@@ -107,16 +112,26 @@ public class MapDrawer {
         drawIteration(0);
 
     }
-    public void clearMap() {
+    public void saveMapToImage(File file){
+        WritableImage writableImage = new WritableImage(width, height);
+        canvas.snapshot(null, writableImage);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(writableImage, null), "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void clearMap() {
         gc.clearRect(0, 0, width, height);
     }
     public void drawIteration(int iteration){
+        updateInternalValues();
         clearMap();
         drawEdges();
         drawMap(iteration);
 
     }
-    public void drawMap(int iteration){
+    private void drawMap(int iteration){
         for(int y = 0; y < Map.height; y++){
             for(int x = 0; x < Map.width; x++){
                 int c = Map.maps.get(iteration).getCell(y, x).getState();

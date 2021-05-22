@@ -22,6 +22,7 @@ public class Main extends Application {
     public static int currentIteration = 0;
     public static int howManyIterations = 30;
     public static int animationSpeed = 4;
+    public static String currentFilePath = Main.class.getResource("/WireWorld/test.txt").getPath(); //default file
     public static MapDrawer canvasDrawer;
 
     @Override
@@ -38,14 +39,13 @@ public class Main extends Application {
 
         //Default map
 
-        ReadFromFile.read(getClass().getResource("/WireWorld/test.txt").getPath());
+        ReadFromFile.read(currentFilePath);
         //ReadFromFile.read(getClass().getResource("/WireWorld/testSerializable.ser").getPath());
         //ReadFromFile.read("testSerializable.ser");
 
         generateIterations(howManyIterations);
 
-        canvasDrawer.drawEdges();
-       canvasDrawer.drawMap(currentIteration);
+       canvasDrawer.drawIteration(currentIteration);
 
 
         SettingsController settingsController = new SettingsController(scene);

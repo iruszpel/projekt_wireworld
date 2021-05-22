@@ -1,15 +1,21 @@
 package GUI;
 
 import WireWorld.Map;
+import WireWorld.ReadFromFile;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public class SettingsController implements GUIController {
     private Scene scene;
+    public static String fileFormat = "ser"; //Default file format
 
     public SettingsController(Scene scene) {
         this.scene = scene;
@@ -22,7 +28,19 @@ public class SettingsController implements GUIController {
         AnchorPane settingsPanel = (AnchorPane) scene.lookup("#settingsBox");
 
         ImageView settingsButton = (ImageView) scene.lookup("#settingsButton");
+        TextField widthField = (TextField) scene.lookup("#widthField");
+        TextField heightField = (TextField) scene.lookup("#heightField");
+
+        ComboBox fileFormatBox = (ComboBox) scene.lookup("#fileFormatBox");
+        fileFormatBox.getItems().add("Stan mapy (*.ser)");
+        fileFormatBox.getItems().add("Obraz (*.png)");
+
         settingsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //Init height and width values
+            widthField.setText(String.valueOf(Main.w));
+            heightField.setText(String.valueOf(Main.h));
+            //Init file format
+            fileFormatBox.getSelectionModel().select(fileFormat == "ser" ? 0 : 1);
             settingsPanel.setVisible(true);
             event.consume();
         });
@@ -33,6 +51,30 @@ public class SettingsController implements GUIController {
             event.consume();
         });
 
+
+        Button applyButton = (Button) scene.lookup("#applyButton");
+        applyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            fileFormat = fileFormatBox.getSelectionModel().getSelectedIndex() == 0 ? "ser" : "png"; //Lepsza mapa jakby więcej formatów było
+            int selectedHeight = Integer.parseInt(heightField.getText());
+            int selectedWidth = Integer.parseInt(widthField.getText());
+            if (Main.h != selectedHeight || Main.w != selectedWidth) {
+                Map.height = Main.h = selectedHeight;
+                Map.width = Main.w = selectedWidth;
+                try {
+                    Map.maps.clear();
+                    Map.iteration = -1;
+                    ReadFromFile.read(Main.currentFilePath);
+                } catch(Exception e) {
+                    System.out.println("Nastąpił błąd przy ponownym wczytywaniu pliku. Sprawdź czy plik wciąż istnieje");
+                    return;
+                }
+                Main.generateIterations(Main.howManyIterations);
+                Main.canvasDrawer.drawIteration(0);
+            }
+
+            settingsPanel.setVisible(false);
+            event.consume();
+        });
 
 
 
