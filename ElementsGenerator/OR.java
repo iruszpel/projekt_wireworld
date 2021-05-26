@@ -30,7 +30,7 @@ public class OR extends ElementsGenerator {
 
     public void generate(Cell cell, String facing){
         int x = cell.getX();
-        int y = cell.getY(); //ustawienie punktu początkowego na komórkę[0][0] modelu
+        int y = cell.getY();
 
         switch(facing){
             case "up":{

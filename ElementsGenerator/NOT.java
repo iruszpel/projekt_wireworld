@@ -17,28 +17,32 @@ public class NOT extends ElementsGenerator {
 
     public void generate(Cell cell, String facing){
         int x = cell.getX();
-        int y = cell.getY() - 1; //ustawienie punktu początkowego na komórkę[0][0] modelu
+        int y = cell.getY();
 
         switch(facing){
             case "up":{
+                x--;
                 if(ElementsGenerator.gonnaFit(NotUpModel, y, x)){
                     generateModel(NotUpModel, y, x);
                 }
                 break;
             }
             case "down":{
+                x--;
                 if(ElementsGenerator.gonnaFit(NotUpModel, y, x)){
                     generateModel(NotUpModel, y, x);
                 }
                 break;
             }
             case "right":{
+                y--;
                 if(ElementsGenerator.gonnaFit(NotRightModel, y, x)){
                     generateModel(NotRightModel, y, x);
                 }
                 break;
             }
             case "left":{
+                y--;
                 if(ElementsGenerator.gonnaFit(NotRightModel, y, x)){
                     generateModel(NotRightModel, y, x);
                 }

@@ -33,28 +33,32 @@ public class Generator extends ElementsGenerator {
 
     public void generate(Cell cell, String facing) {
         int x = cell.getX();
-        int y = cell.getY() - 1;
+        int y = cell.getY();
 
         switch(facing){
             case "up":{
+                x--;
                 if(ElementsGenerator.gonnaFit(GeneratorUpModel, y, x)){
                     generateModel(GeneratorUpModel, y, x);
                 }
                 break;
             }
             case "down":{
+                x--;
                 if(ElementsGenerator.gonnaFit(GeneratorDownModel, y, x)){
                     generateModel(GeneratorDownModel, y, x);
                 }
                 break;
             }
             case "right":{
+                y--;
                 if(ElementsGenerator.gonnaFit(GeneratorRightModel, y, x)){
                     generateModel(GeneratorRightModel, y, x);
                 }
                 break;
             }
             case "left":{
+                y--;
                 if(ElementsGenerator.gonnaFit(GeneratorLeftModel, y, x)){
                     generateModel(GeneratorLeftModel, y, x);
                 }

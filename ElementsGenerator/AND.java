@@ -54,7 +54,7 @@ public class AND extends ElementsGenerator {
 
     public void generate(Cell cell, String facing){
         int x = cell.getX();
-        int y = cell.getY() - 1; //ustawienie punktu początkowego na komórkę[0][0] modelu
+        int y = cell.getY();
 
         switch(facing){
             case "up":{
