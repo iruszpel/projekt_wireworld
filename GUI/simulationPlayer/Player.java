@@ -1,26 +1,26 @@
 package GUI.simulationPlayer;
 
 import GUI.Main;
-import GUI.MapDrawer;
-import WireWorld.Map;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 //Wzorzec projektowy Stan - pomijanie krótkiego switch case milionem klas które trudniej zrozumieć
 public class Player {
     private SimulationState state;
     protected ImageView playButton;
-    protected Timer t;
     protected Slider iterSlider;
+    protected Timeline animLoop;
     public Player(ImageView playButton, Slider iterSlider) {
         this.playButton = playButton;
         this.iterSlider = iterSlider;
         this.state = new PausedState(this); //Default state is paused
-        this.t = new Timer();
+        this.animLoop = new Timeline();
+        this.animLoop.setCycleCount( Timeline.INDEFINITE );
     }
     public void changeState(SimulationState state) {
         this.state = state;
@@ -43,7 +43,8 @@ class PlayingState extends SimulationState {
 
     @Override
     public void play() {
-        player.t.cancel();
+        player.animLoop.stop();
+        player.animLoop.getKeyFrames().remove(0);
         player.changeState(new PausedState(player));
         this.changeIcon();
     }
@@ -60,15 +61,17 @@ class PausedState extends SimulationState {
 
     @Override
     public void play() {
-        player.t = new Timer();
-        player.t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if(Main.currentIteration == Main.howManyIterations)
-                    Main.currentIteration = -1;
-                player.clickNext();
-            }
-        }, 0, 1000/Main.animationSpeed);
+
+        KeyFrame kf = new KeyFrame(
+                Duration.seconds(1/(double)Main.animationSpeed),
+                ae -> {
+                    if(Main.currentIteration == Main.howManyIterations)
+                        Main.currentIteration = -1;
+                    player.clickNext();
+                });
+
+        player.animLoop.getKeyFrames().add( kf );
+        player.animLoop.play();
 
         player.changeState(new PlayingState(player));
         this.changeIcon();
