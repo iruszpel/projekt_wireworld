@@ -122,7 +122,7 @@
                   </ImageView>
                </children>
             </TilePane>
-            <VBox id="addElementsBox" layoutX="11.0" layoutY="110.0" prefHeight="503.0" prefWidth="150.0" styleClass=".addElementsBox" stylesheets="@css/side_buttons.css">
+            <VBox id="addElementsBox" layoutX="11.0" layoutY="110.0" prefHeight="540.0" prefWidth="150.0" styleClass=".addElementsBox" stylesheets="@css/side_buttons.css">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Podstawowe:">
                      <font>
@@ -132,7 +132,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Text>
-                  <VBox prefHeight="181.0" prefWidth="150.0" spacing="20.0">
+                  <VBox prefHeight="174.0" prefWidth="150.0" spacing="20.0">
                      <children>
                         <Button id="electronHeadButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Głowa elektronu">
                            <VBox.margin>
@@ -169,7 +169,7 @@
                         <Font size="13.0" />
                      </font>
                   </Text>
-                  <VBox id="addGatesBox" prefHeight="176.0" prefWidth="150.0" spacing="20.0">
+                  <VBox id="addGatesBox" prefHeight="172.0" prefWidth="150.0" spacing="20.0">
                      <children>
                         <Button id="ORGateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="OR">
                            <VBox.margin>
@@ -202,7 +202,7 @@
                         <Font size="13.0" />
                      </font>
                   </Text>
-                  <VBox prefHeight="104.0" prefWidth="150.0" spacing="20.0">
+                  <VBox prefHeight="122.0" prefWidth="150.0" spacing="20.0">
                      <children>
                         <Button id="generatorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Generator">
                            <VBox.margin>
@@ -213,7 +213,13 @@
                               <String fx:value="addElemButton" />
                            </styleClass>
                         </Button>
-                        <Button id="wireButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Kabel XD">
+                        <Button id="wireButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Kabel">
+                           <styleClass>
+                              <String fx:value="otherElemButton" />
+                              <String fx:value="addElemButton" />
+                           </styleClass>
+                        </Button>
+                        <Button id="diodeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Dioda">
                            <styleClass>
                               <String fx:value="otherElemButton" />
                               <String fx:value="addElemButton" />
@@ -348,8 +354,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <AnchorPane layoutX="32.0" layoutY="616.0" prefHeight="86.0" prefWidth="101.0" />
-            <ImageView id="upButton" fitHeight="33.0" fitWidth="36.0" layoutX="66.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" styleClass="directionButton">
+            <ImageView id="upButton" fitHeight="33.0" fitWidth="36.0" layoutX="66.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true" styleClass="directionButton">
                <image>
                   <Image url="@resources/outline_arrow_upward_black_24dp.png" />
                </image>
@@ -360,7 +365,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="rightButton" fitHeight="33.0" fitWidth="36.0" layoutX="87.0" layoutY="637.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" styleClass="directionButton">
+            <ImageView id="rightButton" fitHeight="33.0" fitWidth="36.0" layoutX="87.0" layoutY="672.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" styleClass="directionButton">
                <image>
                   <Image url="@resources/outline_arrow_upward_black_24dp.png" />
                </image>
@@ -371,7 +376,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="downButton" fitHeight="33.0" fitWidth="36.0" layoutX="66.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" styleClass="directionButton">
+            <ImageView id="downButton" fitHeight="33.0" fitWidth="36.0" layoutX="66.0" layoutY="694.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" styleClass="directionButton">
                <image>
                   <Image url="@resources/outline_arrow_upward_black_24dp.png" />
                </image>
@@ -382,7 +387,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView id="leftButton" fitHeight="33.0" fitWidth="36.0" layoutX="44.0" layoutY="637.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" styleClass="directionButton">
+            <ImageView id="leftButton" fitHeight="33.0" fitWidth="36.0" layoutX="44.0" layoutY="672.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" styleClass="directionButton">
                <image>
                   <Image url="@resources/outline_arrow_upward_black_24dp.png" />
                </image>

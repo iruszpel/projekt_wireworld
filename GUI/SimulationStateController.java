@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 
 public class SimulationStateController implements GUIController {
     private Scene scene;
+    protected static Player simPlayer;
 
     public SimulationStateController(Scene scene) {
         this.scene = scene;
@@ -20,12 +21,11 @@ public class SimulationStateController implements GUIController {
         iterSlider.setMax(Main.howManyIterations);
         iterSlider.setMajorTickUnit(Main.howManyIterations/5);
         iterSlider.setOnMouseReleased(event -> {
-            Main.currentIteration = (int)iterSlider.getValue();
-            Main.canvasDrawer.drawIteration(Main.currentIteration);
+            simPlayer.clickSlider(iterSlider);
         });
 
         ImageView playPauseButton = (ImageView) scene.lookup("#playPauseButton");
-        Player simPlayer = new Player(playPauseButton,iterSlider);
+        simPlayer = new Player(playPauseButton,iterSlider);
         playPauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             simPlayer.clickPlay();
         });

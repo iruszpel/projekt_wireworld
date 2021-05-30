@@ -4,7 +4,6 @@ import GUI.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -34,6 +33,17 @@ public class Player {
     public void clickPrevious(){
         state.previousIteration();
     }
+    public void clickSlider(Slider iterSlider) {state.sliderChange(iterSlider);};
+
+    public void lock(){
+        animLoop.stop();
+        this.state.changeToPlayIcon();
+        this.state = new LockedState(this);
+    };
+    public void unlock(){
+        this.state = new PausedState(this);
+    };
+
 
 }
 class PlayingState extends SimulationState {
@@ -46,11 +56,7 @@ class PlayingState extends SimulationState {
         player.animLoop.stop();
         player.animLoop.getKeyFrames().remove(0);
         player.changeState(new PausedState(player));
-        this.changeIcon();
-    }
-    private void changeIcon() {
-        Image playImage = new Image(getClass().getResource("/GUI/resources/outline_play_circle_black_24dp.png").toExternalForm());
-        player.playButton.setImage(playImage);
+        this.changeToPlayIcon();
     }
 }
 class PausedState extends SimulationState {
@@ -74,16 +80,33 @@ class PausedState extends SimulationState {
         player.animLoop.play();
 
         player.changeState(new PlayingState(player));
-        this.changeIcon();
+        this.changeToPauseIcon();
 
 
     }
 
+}
+class LockedState extends SimulationState {
+    public LockedState(Player player) {
+        super(player);
+    }
 
-
-    private void changeIcon() {
-        Image playImage = new Image(getClass().getResource("/GUI/resources/outline_pause_circle_black_24dp.png").toExternalForm());
-        player.playButton.setImage(playImage);
+    @Override
+    public void play() {
+        System.out.println("W trybie edycji zablokowane jest używanie animacji!");
+    }
+    @Override
+    public void nextIteration(){
+        System.out.println("W trybie edycji zablokowane jest używanie animacji!");
+    }
+    @Override
+    public void previousIteration(){
+        System.out.println("W trybie edycji zablokowane jest używanie animacji!");
+    }
+    @Override
+    public void sliderChange(Slider iterSlider){
+        iterSlider.setValue(0);
+        System.out.println("W trybie edycji zablokowane jest używanie animacji!");
     }
 }
 

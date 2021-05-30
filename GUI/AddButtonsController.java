@@ -25,15 +25,16 @@ public class AddButtonsController implements GUIController {
     private boolean isInAddingMode = false;
     //0,1,2,3 - top,right,bottom,left
     private int selectedDirection = 1;
-    private boolean undoEnabled = false;
+    private static boolean undoEnabled = false;
 
-    private ImageView undoButton;
+    private static ImageView undoButton;
     private Canvas simCanvas;
     private Slider iterSlider;
     private VBox addElementsBox;
 
     private String elemType;
     private String facingSide = "right"; //Default facing
+
 
     private HashMap<String, ElementsGenerator> elementTypesMap = new HashMap<>();
 
@@ -57,6 +58,7 @@ public class AddButtonsController implements GUIController {
 
         this.elementTypesMap.put("generator", new Generator());
         this.elementTypesMap.put("wire", new Wire());
+        this.elementTypesMap.put("diode", new Diode());
 
         focusDirectionButton();
 
@@ -71,12 +73,16 @@ public class AddButtonsController implements GUIController {
         ColorAdjust tempEffect = new ColorAdjust();
         //If clicked again disable adding mode
         if (!isInAddingMode) {
+            //Unlock player
+            SimulationStateController.simPlayer.unlock();
+            //Return cursor and buttons to default
             simCanvas.setCursor(Cursor.DEFAULT);
             tempEffect.setBrightness(0.0);
             tempNode.setEffect(tempEffect);
             deactivateAllButtons();
             return;
         }
+        SimulationStateController.simPlayer.lock();
         tempEffect.setBrightness(-0.25);
         tempNode.setEffect(tempEffect);
         simCanvas.setCursor(Cursor.HAND);
@@ -174,14 +180,14 @@ public class AddButtonsController implements GUIController {
         });
 
         }
-        private void enableUndoButton(){
+        protected static void enableUndoButton(){
             undoEnabled = true;
             ColorAdjust tempEffect = new ColorAdjust();
             tempEffect.setBrightness(1.0);
             undoButton.setEffect(tempEffect);
             undoButton.setCursor(Cursor.HAND);
         }
-        private void disableUndoButton(){
+        protected static void disableUndoButton(){
             undoEnabled = false;
             ColorAdjust tempEffect = new ColorAdjust();
             tempEffect.setBrightness(0.6);

@@ -112,6 +112,9 @@ public class MapDrawer {
         drawIteration(0);
 
     }
+    public void removeMapStates(){
+        historyStack.clear();
+    }
     public void saveMapToImage(File file){
         WritableImage writableImage = new WritableImage(width, height);
         canvas.snapshot(null, writableImage);

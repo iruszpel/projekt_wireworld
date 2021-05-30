@@ -61,6 +61,10 @@ public class SettingsController implements GUIController {
                 Map.height = Main.h = selectedHeight;
                 Map.width = Main.w = selectedWidth;
                 try {
+                    if (Main.currentFilePath == null){ //Była pusta mapa
+                        IOButtonsController.clearMap();
+                        return;
+                    }
                     Map.maps.clear();
                     Map.iteration = -1;
                     ReadFromFile.read(Main.currentFilePath);

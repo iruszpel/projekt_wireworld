@@ -71,13 +71,22 @@ public class IOButtonsController implements GUIController {
         });
         ImageView clearMapButton = (ImageView) scene.lookup("#clearMapButton");
         clearMapButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            Map.maps.clear();
-            Map.iteration = -1;
-            new Map(Main.h,Main.w);
-            Main.generateIterations(Main.howManyIterations);
-            Main.canvasDrawer.drawIteration(0);
+            clearMap();
+            Main.currentFilePath = null;
+
+            //Disable undo button and clear edit history
+            AddButtonsController.disableUndoButton();
+            Main.canvasDrawer.removeMapStates();
+
             event.consume();
         });
 
+    }
+    protected static void clearMap(){
+        Map.maps.clear();
+        Map.iteration = -1;
+        new Map(Main.h,Main.w);
+        Main.generateIterations(Main.howManyIterations);
+        Main.canvasDrawer.drawIteration(0);
     }
 }
