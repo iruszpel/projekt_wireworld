@@ -3,9 +3,9 @@ package Cell;
 import java.io.Serializable;
 
 public class Cell implements Serializable {
-    int x;
-    int y;
-    int state;
+    private int x;
+    private int y;
+    private int state;
 
     public Cell( int y, int x) {
         this.x = x;
@@ -21,7 +21,7 @@ public class Cell implements Serializable {
         this.state = state;
     }
 
-    //funkcje nie były przewidziane w diagramie klas
+
     public int getX(){
         return x;
     }
