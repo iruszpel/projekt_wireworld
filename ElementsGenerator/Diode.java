@@ -31,28 +31,33 @@ public class Diode extends ElementsGenerator {
 
     public void generate(Cell cell, String facing){
         int x = cell.getX();
-        int y = cell.getY() - 1; //ustawienie punktu początkowego na komórkę[0][0] modelu
+        int y = cell.getY();
 
         switch(facing){
             case "up":{
+                x--;
                 if(ElementsGenerator.gonnaFit(DiodeUpModel, y, x)){
                     generateModel(DiodeUpModel, y, x);
                 }
                 break;
             }
             case "down":{
+                x--;
+
                 if(ElementsGenerator.gonnaFit(DiodeDownModel, y, x)){
                     generateModel(DiodeDownModel, y, x);
                 }
                 break;
             }
             case "right":{
+                y--;
                 if(ElementsGenerator.gonnaFit(DiodeRightModel, y, x)){
                     generateModel(DiodeRightModel, y, x);
                 }
                 break;
             }
             case "left":{
+                y--;
                 if(ElementsGenerator.gonnaFit(DiodeLeftModel, y, x)){
                     generateModel(DiodeLeftModel, y, x);
                 }
